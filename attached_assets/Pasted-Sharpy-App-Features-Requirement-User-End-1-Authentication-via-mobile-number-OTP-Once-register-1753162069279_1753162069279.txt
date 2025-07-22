@@ -1,0 +1,59 @@
+Sharpy App Features Requirement:
+User End:
+1. Authentication via mobile number - OTP. (Once registered, mobile-number
+with password)
+2. Maximum login device number: admin controllable.
+3. Registration on first Sign-up. (Name, School, Email, Class, Address)
+4. According to the selected class, the courses should show. Also should be
+able to check the other classes’s courses & get admission if wanted.
+5. 5 Pages(Screens): HomePage, Courses, My Journey, Notifications, Shorts
+6. Home Page -
+* If no a premium (not yet admitted):
+Show the promotional banner/videos.
+Test Series (Free): (Title: “Apply For A Test”) -> When clicked, subject
+wise test series should be shown, as per the class.
+YT Video thumbnails as swipe-able, when clicked play the video
+Testimonial Videos: (Headline: “SHARPY-ত পঢ়া Student-ৰ মনৰ ভাৱ”)
+Floating Action Button: Call & Whatsapp us
+* If Premium user:
+Scheduled Live Class’s Banner
+Enrolled Courses’s Thumbnails as a list.
+YT Video thumbnails as swipe-able, when clicked play the video
+Testimonial Videos: (Headline: “SHARPY-ত পঢ়া Student-ৰ মনৰ ভাৱ”)
+Floating Action Button: Call & Whatsapp us
+Courses -
+* Same for premium/non-premium:
+Show the available courses for that class, also in other tab show other
+classes courses
+My Journey -
+The records of the user’s test series results in an animated way.
+The time spent in Sharpy’s app daily
+How many videos have been watched or how many tests have been
+appeared.
+-Basically an analytics
+If a non-premium user: At the end “It is the time for you to study with
+Sharpy & Excel in your Life”.
+IMPORTANT: There should be a coins system:
+When an user watches a video: he should be rewarded with 6 coins,
+when he appears a test series & scores <60%, he gets 5 coins, >=60% 10
+coins. When watches 1 shorts(in the shorts tab, which are educational shorts
+only), gets 1 coin. When the user refers another user successfully, he gets 30
+coins.
+Later, these coins can be redeemed in purchasing courses for a discount ->
+Buying Sharpy Merchandises (t-shirt, books, cups, bags, etc).
+Notifications -
+7.
+8.
+When the user attempts a test series: a notification (alert text) to
+check the result.
+When a successful referral happens.
+When the admin wants to push a message to the students.
+Shorts -
+A basic exoplayer to play the youtube uploaded shorts.
+For courses : how to show, how to play, how to structure: pls download
+‘sharpy app’ from google play store.
+database structure: Course name -> Chapter/subject name -> lecture
+name.
+In the app, we will later introduce: per month subscription (very less than
+the course fee), if taken, we will give students some add-on like: Mock
+Tests, Quiz Competition series, etc.
