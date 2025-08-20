@@ -13,12 +13,19 @@ class DatabaseManager:
     
     def get_connection(self):
         """Get database connection"""
-        return psycopg2.connect(self.connection_string)
+        try:
+            return psycopg2.connect(self.connection_string)
+        except Exception as e:
+            print(f"Database connection error: {e}")
+            return None
     
     def init_database(self):
         """Initialize database tables"""
         try:
             conn = self.get_connection()
+            if not conn:
+                print("Database connection failed. Using fallback mode.")
+                return
             cursor = conn.cursor()
             
             # Users table
