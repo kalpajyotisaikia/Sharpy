@@ -374,7 +374,6 @@ def show_floating_buttons():
 def main():
     if not st.session_state.authenticated:
         show_auth_page()
-        show_footer()
     else:
         show_navigation()
         
@@ -390,14 +389,17 @@ def main():
             exec(open('pages/4_Shorts.py').read())
         
         show_floating_buttons()
-        show_footer()
+    
+    # Show footer on all pages
+    show_footer()
 
 def show_footer():
     """Show footer with copyright and developer information"""
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
     st.markdown(
         """
-        <div style='text-align: center; padding: 20px; color: #666; font-size: 14px;'>
+        <div style='text-align: center; padding: 20px; color: #666; font-size: 14px; margin-top: 50px;'>
             <p><strong>© 2025 Sharpy. All rights reserved.</strong></p>
             <p>Developed by <strong>DG Developers</strong></p>
         </div>
