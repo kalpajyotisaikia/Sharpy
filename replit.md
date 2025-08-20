@@ -7,6 +7,7 @@ Sharpy Educational App is a comprehensive educational platform built with Stream
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Copyright notice: All content should include copyright to Sharpy and development credit to DG Developers.
 
 ## System Architecture
 

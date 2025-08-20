@@ -131,10 +131,18 @@ sharpy-educational-platform/
 - Efficient resource management
 - Cloud deployment ready
 
-## License
+## Copyright & Development
 
-This software is provided under standard software licensing terms.
+**© 2025 Sharpy. All rights reserved.**
+
+**Developed by DG Developers**
+
+This software and all associated intellectual property rights are owned by Sharpy. The platform represents proprietary technology developed specifically for educational institutions and learning management applications.
 
 ## Professional Development
 
-Built with modern software engineering practices, following industry standards for educational technology platforms. The system is designed for scalability, maintainability, and extensibility to meet evolving educational needs.
+Built with modern software engineering practices by DG Developers, following industry standards for educational technology platforms. The system is designed for scalability, maintainability, and extensibility to meet evolving educational needs.
+
+## License
+
+This software is proprietary and protected under copyright law. All rights reserved by Sharpy.
