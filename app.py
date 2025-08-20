@@ -389,6 +389,20 @@ def main():
             exec(open('pages/4_Shorts.py').read())
         
         show_floating_buttons()
+        show_footer()
+
+def show_footer():
+    """Show footer with copyright and developer information"""
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style='text-align: center; padding: 20px; color: #666; font-size: 14px;'>
+            <p><strong>© 2025 Sharpy. All rights reserved.</strong></p>
+            <p>Developed by <strong>DG Developers</strong></p>
+        </div>
+        """, 
+        unsafe_allow_html=True
+    )
 
 def show_otp_login_section():
     """Show OTP-based login interface"""
