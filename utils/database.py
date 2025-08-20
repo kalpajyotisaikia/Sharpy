@@ -8,8 +8,23 @@ class DatabaseManager:
     """Manage database operations for the Sharpy Education app"""
     
     def __init__(self):
-        # Try custom DATABASE_URL first, then fall back to environment
-        self.connection_string = os.getenv('CUSTOM_DATABASE_URL') or os.getenv('DATABASE_URL')
+        # Try different Render database hostname patterns
+        render_urls = [
+            "postgresql://frudent_db_user:AXNmaumb01w93rfozH5oXEPxVxFKgLhm@dpg-d2hmfaemcj7s73br3hmg-a.oregon-postgres.render.com/frudent_db",
+            "postgresql://frudent_db_user:AXNmaumb01w93rfozH5oXEPxVxFKgLhm@dpg-d2hmfaemcj7s73br3hmg-a.render.com/frudent_db",
+            "postgresql://frudent_db_user:AXNmaumb01w93rfozH5oXEPxVxFKgLhm@dpg-d2hmfaemcj7s73br3hmg-a.us-west-2.postgres.render.com/frudent_db"
+        ]
+        
+        self.connection_string = None
+        for url in render_urls:
+            try:
+                test_conn = psycopg2.connect(url)
+                test_conn.close()
+                self.connection_string = url
+                break
+            except Exception as e:
+                print(f"Failed to connect with {url}: {e}")
+                continue
         self.fallback_mode = False
         self.users_data = {}  # Fallback storage
         self.init_database()
