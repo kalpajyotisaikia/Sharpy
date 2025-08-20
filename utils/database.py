@@ -8,7 +8,8 @@ class DatabaseManager:
     """Manage database operations for the Sharpy Education app"""
     
     def __init__(self):
-        self.connection_string = os.getenv('DATABASE_URL')
+        # Try custom DATABASE_URL first, then fall back to environment
+        self.connection_string = os.getenv('CUSTOM_DATABASE_URL') or os.getenv('DATABASE_URL')
         self.fallback_mode = False
         self.users_data = {}  # Fallback storage
         self.init_database()
