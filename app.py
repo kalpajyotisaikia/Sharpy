@@ -374,6 +374,7 @@ def show_floating_buttons():
 def main():
     if not st.session_state.authenticated:
         show_auth_page()
+        show_footer()
     else:
         show_navigation()
         
