@@ -41,8 +41,10 @@ Thumbs.db
 
 # Development environment files
 .replit
+app_config.toml
 .config/
 replit.nix
 .upm/
 uv.lock
-pyproject.tomlreplit.md
+pyproject.toml
+technical_notes.mdreplit.md
