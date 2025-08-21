@@ -197,9 +197,12 @@ class DatabaseManager:
     
     def user_exists(self, phone: str) -> bool:
         """Check if user exists by phone number"""
+        # Normalize phone number (remove +91 prefix if present)
+        normalized_phone = phone.replace('+91', '') if phone.startswith('+91') else phone
+        
         # Always check fallback first for recently registered users
-        if phone in self.users_data:
-            print(f"User found in fallback storage: {phone}")
+        if normalized_phone in self.users_data:
+            print(f"User found in fallback storage: {normalized_phone}")
             return True
         
         if self.fallback_mode:
@@ -211,12 +214,13 @@ class DatabaseManager:
                 return False
                 
             cursor = conn.cursor()
-            cursor.execute("SELECT id FROM users WHERE phone = %s", (phone,))
+            # Check both normalized and original format
+            cursor.execute("SELECT id FROM users WHERE phone = %s OR phone = %s", (phone, normalized_phone))
             result = cursor.fetchone()
             cursor.close()
             conn.close()
             exists = result is not None
-            print(f"User exists in database: {phone} -> {exists}")
+            print(f"User exists in database: {phone} (normalized: {normalized_phone}) -> {exists}")
             return exists
         except Exception as e:
             print(f"User exists check error: {e}")
@@ -257,32 +261,36 @@ class DatabaseManager:
     
     def get_user_by_phone(self, phone: str) -> dict:
         """Get user data by phone number"""
+        # Normalize phone number (remove +91 prefix if present)
+        normalized_phone = phone.replace('+91', '') if phone.startswith('+91') else phone
+        
         if self.fallback_mode:
-            user = self.users_data.get(phone)
-            print(f"Getting user from fallback: {phone} -> {user is not None}")
+            user = self.users_data.get(normalized_phone) or self.users_data.get(phone)
+            print(f"Getting user from fallback: {phone} (normalized: {normalized_phone}) -> {user is not None}")
             return user
         
         try:
             conn = self.get_connection()
             if not conn:
                 # Check fallback
-                user = self.users_data.get(phone)
-                print(f"Database unavailable, checking fallback: {phone} -> {user is not None}")
+                user = self.users_data.get(normalized_phone) or self.users_data.get(phone)
+                print(f"Database unavailable, checking fallback: {phone} (normalized: {normalized_phone}) -> {user is not None}")
                 return user
                 
             cursor = conn.cursor(cursor_factory=RealDictCursor)
-            cursor.execute("SELECT * FROM users WHERE phone = %s", (phone,))
+            # Check both normalized and original format
+            cursor.execute("SELECT * FROM users WHERE phone = %s OR phone = %s", (phone, normalized_phone))
             user = cursor.fetchone()
             cursor.close()
             conn.close()
             result = dict(user) if user else None
-            print(f"Getting user from database: {phone} -> {result is not None}")
+            print(f"Getting user from database: {phone} (normalized: {normalized_phone}) -> {result is not None}")
             return result
         except Exception as e:
             print(f"Get user error: {e}")
             # Check fallback
-            user = self.users_data.get(phone)
-            print(f"Database error, checking fallback: {phone} -> {user is not None}")
+            user = self.users_data.get(normalized_phone) or self.users_data.get(phone)
+            print(f"Database error, checking fallback: {phone} (normalized: {normalized_phone}) -> {user is not None}")
             return user
     
     def get_user_coins(self, user_id: int) -> int:
