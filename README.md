@@ -68,10 +68,10 @@ Sharpy Educational Platform is a modern web-based learning management system tha
 - Modern web browser support
 - Optional: SMS service integration
 
-### Installation
+### Setup
 ```bash
 pip install -r requirements.txt
-python app.py
+streamlit run app.py
 ```
 
 ## Project Architecture
