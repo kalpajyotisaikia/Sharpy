@@ -8,10 +8,10 @@ class DatabaseManager:
     """Manage database operations for the Sharpy Education app"""
     
     def __init__(self):
-        # Use environment variable for production, fallback for development
-        self.connection_string = os.getenv('DATABASE_URL') or "postgresql://frudent_db_user:AXNmaumb01w93rfozH5oXEPxVxFKgLhm@dpg-d2hmfaemcj7s73br3hmg-a.oregon-postgres.render.com/frudent_db"
+        # Always use the Render database URL directly
+        self.connection_string = "postgresql://frudent_db_user:AXNmaumb01w93rfozH5oXEPxVxFKgLhm@dpg-d2hmfaemcj7s73br3hmg-a.oregon-postgres.render.com/frudent_db"
         self.fallback_mode = False
-        self.users_data = {}  # Fallback storage
+        self.users_data = {}  # Fallback storage for when database is unavailable
         self.init_database()
     
     def get_connection(self):
@@ -218,16 +218,19 @@ class DatabaseManager:
     def create_user(self, user_data: dict) -> bool:
         """Create a new user"""
         if self.fallback_mode:
-            # Store in fallback
+            # Store in fallback with proper structure
             user_id = len(self.users_data) + 1
             user_data['id'] = user_id
             self.users_data[user_data['phone']] = user_data
+            print(f"User created in fallback mode: {user_data['phone']}")
             return True
         
         try:
             conn = self.get_connection()
             if not conn:
-                return False
+                # Fallback to local storage
+                self.fallback_mode = True
+                return self.create_user(user_data)
                 
             cursor = conn.cursor()
             cursor.execute("""
@@ -237,30 +240,43 @@ class DatabaseManager:
             conn.commit()
             cursor.close()
             conn.close()
+            print(f"User created in database: {user_data['phone']}")
             return True
         except Exception as e:
             print(f"Create user error: {e}")
-            return False
+            # Fallback to local storage
+            self.fallback_mode = True
+            return self.create_user(user_data)
     
     def get_user_by_phone(self, phone: str) -> dict:
         """Get user data by phone number"""
         if self.fallback_mode:
-            return self.users_data.get(phone)
+            user = self.users_data.get(phone)
+            print(f"Getting user from fallback: {phone} -> {user is not None}")
+            return user
         
         try:
             conn = self.get_connection()
             if not conn:
-                return None
+                # Check fallback
+                user = self.users_data.get(phone)
+                print(f"Database unavailable, checking fallback: {phone} -> {user is not None}")
+                return user
                 
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             cursor.execute("SELECT * FROM users WHERE phone = %s", (phone,))
             user = cursor.fetchone()
             cursor.close()
             conn.close()
-            return dict(user) if user else None
+            result = dict(user) if user else None
+            print(f"Getting user from database: {phone} -> {result is not None}")
+            return result
         except Exception as e:
             print(f"Get user error: {e}")
-            return None
+            # Check fallback
+            user = self.users_data.get(phone)
+            print(f"Database error, checking fallback: {phone} -> {user is not None}")
+            return user
     
     def get_user_coins(self, user_id: int) -> int:
         """Get user's current coin balance"""
