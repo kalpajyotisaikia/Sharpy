@@ -1,64 +1,74 @@
-# Sharpy Educational Platform
+# Overview
 
-## Overview
+Sharpy Educational Platform is a comprehensive learning management system built with Python and Streamlit. The platform combines traditional educational tools with gamification elements to create an engaging learning environment. It features mobile authentication via OTP, class-specific course management, student progress tracking, and a coin-based reward system to motivate learners.
 
-Sharpy Educational Platform is a comprehensive educational management system built with Python and Streamlit. It's designed to enhance learning experiences through interactive features, course management, and gamification elements. The platform supports multi-class educational content delivery with features like OTP-based authentication, progress tracking, coin-based rewards, and live class scheduling.
-
-## User Preferences
+# User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## System Architecture
+# System Architecture
 
-### Frontend Architecture
-- **Framework**: Streamlit web application framework providing a responsive, mobile-friendly interface
-- **Multi-page Structure**: Organized using Streamlit's page routing system with dedicated pages for courses, journey tracking, notifications, and educational shorts
-- **Session Management**: Client-side session state management for user authentication and navigation
-- **Responsive Design**: Custom CSS styling with gradient themes and mobile-optimized layouts
+## Frontend Architecture
+- **Framework**: Streamlit-based web application with multi-page navigation
+- **UI Design**: Responsive layout with custom CSS styling and gradient themes
+- **Page Structure**: Five main sections - Home, Courses, Journey (Analytics), Notifications, and Educational Shorts
+- **Session Management**: Streamlit session state for user authentication and data persistence
 
-### Backend Architecture
-- **Language**: Python 3.11+ with object-oriented design patterns
-- **Authentication System**: SHA-256 password hashing with OTP verification workflow
-- **Business Logic**: Modular utility classes (AuthManager, DatabaseManager, OTPManager) following single responsibility principle
-- **Session-based Security**: Server-side session management with device limitation controls
-- **Fallback Architecture**: Graceful degradation to demo mode when external services are unavailable
+## Backend Architecture
+- **Application Framework**: Python-based modular architecture with utility classes
+- **Authentication System**: SHA-256 password hashing with phone number-based login
+- **OTP Integration**: Twilio SMS service with fallback demo mode for development
+- **Database Layer**: PostgreSQL with psycopg2 driver and fallback in-memory storage
+- **Data Models**: Comprehensive schema including users, courses, enrollments, notifications, and analytics
 
-### Data Storage Solutions
-- **Primary Database**: PostgreSQL with connection pooling and optimized queries
-- **Database Schema**: Comprehensive relational design supporting users, courses, enrollments, notifications, achievements, and analytics
-- **Fallback Storage**: In-memory session storage for demo/development mode
-- **Data Integrity**: Foreign key relationships and transaction management for data consistency
+## Database Design
+- **Primary Database**: PostgreSQL with structured tables for users, courses, enrollments, test results, and notifications
+- **Connection Management**: Direct connection string configuration with error handling
+- **Fallback Strategy**: In-memory data storage when database is unavailable
+- **Schema Features**: Role-based access control, premium user tracking, and coin economy system
 
-### Authentication and Authorization
-- **Multi-factor Authentication**: Phone number + OTP verification for registration, password-based login for returning users
-- **Role-based Access**: Premium vs. Standard user tiers with feature restrictions
-- **Device Management**: Admin-controlled maximum login device limits per user
-- **Session Security**: Secure session tokens with automatic expiry
+## Authentication & Security
+- **Phone Authentication**: Mobile number-based registration with OTP verification
+- **Password Security**: SHA-256 encryption for password storage
+- **Session Security**: Server-side session management with authentication state tracking
+- **Device Management**: Configurable maximum login device limits per user
 
-### Gamification Engine
-- **Coin Economy**: Points-based reward system for user engagement (videos watched, tests completed, referrals)
-- **Achievement Tracking**: Progress analytics with visual dashboards using Plotly
-- **Learning Analytics**: User journey tracking with study time, completion rates, and performance metrics
-- **Referral System**: Built-in user acquisition mechanism with coin rewards
+## Gamification System
+- **Coin Economy**: Reward system for various user activities (video watching, test completion, referrals)
+- **Progress Tracking**: Analytics for study time, content consumption, and test performance
+- **Achievement System**: Visual progress indicators and performance metrics
+- **Engagement Features**: Streak tracking and milestone celebrations
 
-## External Dependencies
+## Content Management
+- **Course Hierarchy**: Class-based course organization with cross-class exploration
+- **Video Integration**: YouTube video embedding with view tracking
+- **Educational Shorts**: Quick learning content with filtering capabilities
+- **Test Series**: Subject-wise assessments with score-based coin rewards
 
-### Database Services
-- **PostgreSQL**: Primary data persistence layer hosted on Render.com
-- **psycopg2-binary**: PostgreSQL adapter for Python with binary optimizations
+# External Dependencies
 
-### Communication Services  
-- **Twilio SMS API**: OTP delivery and verification service
-- **Phone Number Validation**: International phone number format support
+## Database Services
+- **PostgreSQL**: Primary data storage with Render.com hosted database
+- **Connection String**: Direct database URL configuration for production deployment
 
-### Visualization Libraries
-- **Plotly**: Interactive charts and analytics dashboards
-- **Pandas**: Data manipulation and analysis for user metrics
+## Communication Services
+- **Twilio SMS**: OTP delivery service for mobile authentication
+- **Required Credentials**: Account SID, Auth Token, and Phone Number
+- **Fallback Mode**: Demo OTP system when Twilio credentials unavailable
 
-### Deployment Platform
-- **Render.com**: Cloud hosting platform for Python web applications
-- **Streamlit Cloud**: Alternative deployment option with GitHub integration
-
-### Development Dependencies
+## Python Libraries
+- **Streamlit**: Web application framework for UI rendering
+- **psycopg2-binary**: PostgreSQL database connectivity
+- **pandas**: Data manipulation and analysis
+- **plotly**: Interactive data visualization and analytics charts
 - **python-dotenv**: Environment variable management
+
+## Deployment Platform
+- **Render.com**: Web service hosting with automatic deployment
+- **Runtime**: Python 3.11 environment
+- **Process Management**: Streamlit server with configurable port binding
+
+## Development Tools
 - **setuptools**: Package distribution and dependency management
+- **pytest**: Testing framework for development workflow
+- **black/flake8**: Code formatting and linting tools
