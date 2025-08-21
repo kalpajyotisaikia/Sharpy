@@ -197,8 +197,13 @@ class DatabaseManager:
     
     def user_exists(self, phone: str) -> bool:
         """Check if user exists by phone number"""
+        # Always check fallback first for recently registered users
+        if phone in self.users_data:
+            print(f"User found in fallback storage: {phone}")
+            return True
+        
         if self.fallback_mode:
-            return phone in self.users_data
+            return False
         
         try:
             conn = self.get_connection()
@@ -210,7 +215,9 @@ class DatabaseManager:
             result = cursor.fetchone()
             cursor.close()
             conn.close()
-            return result is not None
+            exists = result is not None
+            print(f"User exists in database: {phone} -> {exists}")
+            return exists
         except Exception as e:
             print(f"User exists check error: {e}")
             return False
