@@ -1,142 +1,148 @@
-# Sharpy Educational App
+# Sharpy Educational Platform
 
-A comprehensive educational platform built with Streamlit featuring mobile authentication, course management, student journey tracking with rewards, and live classes.
+An advanced educational management system designed to enhance learning experiences through interactive features, comprehensive course management, and intelligent tracking systems.
 
-## Features
+## Overview
 
-### 🔐 Authentication System
-- Phone number-based registration
-- Password authentication with secure hashing
-- OTP support (Twilio integration ready)
-- Premium/Non-premium user differentiation
+Sharpy Educational Platform is a modern web-based learning management system that combines traditional educational tools with gamification elements to create an engaging learning environment. The platform supports both individual learners and educational institutions with robust features for course delivery, progress tracking, and student engagement.
 
-### 📚 Course Management
-- Class-specific course catalog
-- Course enrollment and progress tracking
-- Video lecture support
-- Chapter-based learning structure
+## Core Features
 
-### 🎯 Student Journey Tracking
-- Interactive progress dashboard with analytics
-- Coin-based reward system
-- Achievement badges and gamification
-- Learning goal setting and tracking
+### User Management & Authentication
+- Secure phone number-based user registration
+- Multi-factor authentication with OTP support
+- Role-based access control (Premium/Standard users)
+- Comprehensive user profile management
 
-### 📺 Video Content
-- Educational shorts and reels
-- Video streaming capabilities
-- Interactive content browsing
+### Course Management System
+- Hierarchical course structure organization
+- Multi-class support with specialized content
+- Progress tracking and completion analytics
+- Interactive video lecture integration
+- Chapter-based content delivery
 
-### 🔔 Notifications & Communication
-- Real-time notification system
-- Live class scheduling and reminders
-- User engagement tracking
-
-### 📊 Analytics & Insights
-- Learning progress visualization
-- Performance tracking with Plotly charts
-- Educational analytics dashboard
-
-## Tech Stack
-
-- **Frontend:** Streamlit web application
-- **Database:** PostgreSQL with psycopg2
-- **Authentication:** SHA-256 password hashing
-- **Visualization:** Plotly for interactive charts
-- **SMS Integration:** Twilio (optional)
-- **Deployment:** Render.com ready
-
-## Quick Start
-
-### Local Development
-```bash
-# Install dependencies
-pip install -r render_requirements.txt
-
-# Run the application
-streamlit run app.py
-```
-
-### Database Setup
-The app automatically creates required database tables on first run:
-- users
-- courses
-- subjects
-- user_enrollments
-- live_classes
-- notifications
-
-### Environment Variables
-```bash
-DATABASE_URL=postgresql://username:password@host:port/database
-TWILIO_ACCOUNT_SID=your_account_sid (optional)
-TWILIO_AUTH_TOKEN=your_auth_token (optional)
-TWILIO_PHONE_NUMBER=your_phone_number (optional)
-```
-
-## Deployment
-
-See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions on deploying to Render.com.
-
-## Project Structure
-
-```
-sharpy-educational-app/
-├── app.py                 # Main Streamlit application
-├── utils/
-│   ├── auth.py           # Authentication utilities
-│   ├── database.py       # Database operations
-│   └── otp_manager.py    # OTP management (Twilio)
-├── pages/
-│   ├── 1_Courses.py      # Course catalog and management
-│   ├── 2_Journey.py      # Student progress tracking
-│   ├── 3_Notifications.py # Notification center
-│   └── 4_Shorts.py       # Educational video content
-├── render_requirements.txt # Python dependencies
-├── Procfile              # Render.com process configuration
-├── runtime.txt           # Python version
-└── README.md             # This file
-```
-
-## Key Features Details
-
-### Authentication Flow
-1. User registration with phone number validation
-2. Secure password hashing with SHA-256
-3. Optional OTP verification via Twilio
-4. Session management with Streamlit
-
-### Course System
-- Hierarchical course structure (Class → Subject → Course → Chapters)
-- Progress tracking with percentage completion
-- Premium content access control
-- Enrollment management
-
-### Gamification
-- Coin-based reward system for engagement
-- Achievement badges for milestones
-- Progress visualization with charts
+### Learning Analytics & Gamification
+- Real-time progress visualization
+- Achievement-based reward system
+- Coin economy for user engagement
+- Performance analytics dashboard
 - Learning streak tracking
 
-### Database Schema
-The app uses a comprehensive PostgreSQL schema with proper relationships:
-- User management with profile data
-- Course catalog with enrollment tracking
-- Notification system for engagement
-- Live class scheduling
+### Communication & Notifications
+- Integrated notification system
+- Live class scheduling and management
+- Automated reminder system
+- User engagement tracking
 
-## Contributing
+### Content Delivery
+- Educational video streaming
+- Interactive short-form content
+- Multi-media learning resources
+- Mobile-responsive design
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## Technical Architecture
+
+### Backend Infrastructure
+- **Framework:** Python-based web application
+- **Database:** PostgreSQL with optimized queries
+- **Authentication:** SHA-256 encryption with session management
+- **API Integration:** RESTful services architecture
+
+### Frontend Technology
+- **Interface:** Modern web-based user interface
+- **Visualization:** Interactive charts and analytics
+- **Responsive Design:** Cross-platform compatibility
+- **User Experience:** Intuitive navigation and accessibility
+
+### Data Management
+- **User Profiles:** Comprehensive student information
+- **Course Catalog:** Structured learning content
+- **Progress Tracking:** Real-time analytics
+- **Notification System:** Automated communication
+
+## System Requirements
+
+### Dependencies
+- Python 3.11+
+- PostgreSQL database
+- Modern web browser support
+- Optional: SMS service integration
+
+### Installation
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+## Project Architecture
+
+```
+sharpy-educational-platform/
+├── app.py                    # Application entry point
+├── utils/
+│   ├── auth.py              # Authentication management
+│   ├── database.py          # Data layer operations
+│   └── otp_manager.py       # Communication services
+├── pages/
+│   ├── courses.py           # Course management interface
+│   ├── journey.py           # Analytics dashboard
+│   ├── notifications.py    # Communication center
+│   └── content.py           # Media delivery system
+└── requirements.txt         # System dependencies
+```
+
+## Key Capabilities
+
+### Educational Management
+- Course creation and management
+- Student enrollment tracking
+- Performance assessment tools
+- Content organization systems
+
+### Student Engagement
+- Interactive learning pathways
+- Achievement recognition systems
+- Progress visualization tools
+- Personalized learning experiences
+
+### Administrative Features
+- User management dashboard
+- Analytics and reporting
+- Communication tools
+- System configuration
+
+### Integration Support
+- Third-party service connectivity
+- API endpoints for external systems
+- Data export capabilities
+- Scalable architecture design
+
+## Security & Privacy
+
+- Industry-standard encryption protocols
+- Secure user data handling
+- Privacy-compliant design
+- Regular security updates
+
+## Scalability
+
+- Modular architecture for easy expansion
+- Database optimization for high-volume usage
+- Efficient resource management
+- Cloud deployment ready
+
+## Copyright & Development
+
+**© 2025 Sharpy. All rights reserved.**
+
+**Developed by DG Developers**
+
+This software and all associated intellectual property rights are owned by Sharpy. The platform represents proprietary technology developed specifically for educational institutions and learning management applications.
+
+## Professional Development
+
+Built with modern software engineering practices by DG Developers, following industry standards for educational technology platforms. The system is designed for scalability, maintainability, and extensibility to meet evolving educational needs.
 
 ## License
 
-This project is open source and available under the MIT License.
-
-## Support
-
-For issues and questions, please create an issue in the GitHub repository.
+This software is proprietary and protected under copyright law. All rights reserved by Sharpy.

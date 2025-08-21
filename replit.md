@@ -1,141 +1,62 @@
-# Sharpy Educational App
+# Sharpy Educational Platform
 
 ## Overview
 
-Sharpy Educational App is a comprehensive educational platform built with Streamlit that provides mobile authentication via OTP, course management, student journey tracking with coins/rewards, video streaming capabilities, test series functionality, and live classes with notifications. The application serves both premium and non-premium users with differentiated experiences.
+Sharpy Educational Platform is a comprehensive web-based learning management system built with Streamlit that combines traditional educational tools with gamification elements. The platform features mobile authentication via OTP, hierarchical course management, student journey tracking with a coin-based reward system, video content delivery, and real-time notifications. It's designed to enhance learning experiences through interactive features and intelligent tracking systems.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Copyright notice: All content should include copyright to Sharpy and development credit to DG Developers.
 
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: Streamlit web application with multi-page architecture
-- **Layout**: Wide layout with responsive design and custom CSS styling
-- **Navigation**: Button-based navigation with session state management
-- **State Management**: Session state for user authentication and data persistence
-- **UI Components**: Custom styled cards, progress bars, floating action buttons
+- **Framework**: Streamlit web application with multi-page architecture using a main `app.py` and separate page modules in the `pages/` directory
+- **Layout**: Wide layout with responsive design and custom CSS styling featuring gradient headers and styled navigation buttons
+- **Navigation**: Button-based navigation system with session state management for user authentication and data persistence
+- **UI Components**: Custom styled cards, progress bars, floating action buttons, and interactive charts using Plotly
+- **State Management**: Streamlit session state for user authentication, current page tracking, and user data storage
 
 ### Backend Architecture
-- **Database**: PostgreSQL with comprehensive user management and course data
-- **Authentication**: Password hashing with SHA-256 and OTP support (Twilio integration ready)
-- **User Management**: Role-based access with premium/non-premium differentiation
-- **Rewards System**: Coin-based gamification for student engagement
+- **Database**: PostgreSQL with comprehensive schema including users, courses, enrollments, notifications, and analytics tables
+- **Authentication**: Multi-layered security with SHA-256 password hashing and OTP support via Twilio integration
+- **User Management**: Role-based access control differentiating premium and non-premium users with configurable device limits
+- **Gamification System**: Coin-based reward mechanism for user engagement (6 coins for videos, 5-10 coins for tests, 1 coin for shorts, 30 coins for referrals)
+- **Fallback Mode**: Graceful degradation to in-memory storage when database connection fails
+
+### Data Architecture
+- **Users Table**: Comprehensive user profiles with educational details, premium status, and coin balances
+- **Courses Table**: Hierarchical course structure with class-specific content and pricing
+- **Progress Tracking**: Enrollment tracking, test results, and learning analytics
+- **Notification System**: Multi-type notifications for test results, referrals, and admin announcements
 
 ### Key Design Patterns
-- **Authentication-First**: User authentication required for main features
-- **Gamification**: Coins and achievements system for user engagement
-- **Premium Differentiation**: Different experiences for premium vs non-premium users
-- **Modular Database Operations**: Centralized database management with utility classes
-
-## Key Components
-
-### 1. Main Application (app.py)
-- **Authentication System**: Login/registration with password and OTP support
-- **Home Dashboard**: Different experiences for premium/non-premium users
-- **Navigation System**: Button-based page navigation
-- **User Interface**: Custom CSS styling with responsive design
-- **Session Management**: User authentication and data persistence
-
-### 2. Authentication Module (utils/auth.py)
-- **User Registration**: Comprehensive signup with educational details
-- **Password Security**: SHA-256 password hashing
-- **OTP Integration**: Ready for Twilio SMS authentication
-- **User Validation**: Phone number uniqueness and credential verification
-
-### 3. Database Management (utils/database.py)
-- **PostgreSQL Integration**: Complete database schema and operations
-- **User Management**: Registration, authentication, and profile data
-- **Course System**: Course enrollment and progress tracking
-- **Rewards System**: Coins, achievements, and activity tracking
-- **Live Classes**: Scheduling and enrollment management
-- **Notifications**: User notification system
-
-### 4. Courses Page (pages/1_Courses.py)
-- **Course Catalog**: Class-specific and cross-class course browsing
-- **Enrollment System**: Course registration and progress tracking
-- **Content Structure**: Chapter-based learning with video lectures
-- **Premium Features**: Differentiated access for premium users
-
-### 5. Journey Tracking (pages/2_Journey.py)
-- **Analytics Dashboard**: Learning progress visualization with Plotly
-- **Achievement System**: Badge-based gamification
-- **Progress Tracking**: Course completion and performance metrics
-- **Goal Setting**: Personal learning objectives and tracking
-
-## Data Flow
-
-### 1. Data Ingestion
-1. User uploads file or connects to data source
-2. DataLoader validates and processes data
-3. Data stored in session state for persistence
-4. Basic statistics calculated and displayed
-
-### 2. AI Analysis Pipeline
-1. Data summary prepared for AI consumption
-2. OpenAI API called with structured prompts
-3. AI responses parsed and formatted
-4. Results stored in session state
-5. Insights displayed with actionable recommendations
-
-### 3. Visualization Workflow
-1. User selects chart type or requests AI suggestions
-2. VisualizationEngine creates Plotly figures
-3. Charts rendered with interactive capabilities
-4. Visualizations saved to session state gallery
-5. Export options provided for sharing
-
-### 4. Code Generation Process
-1. User selects components to include
-2. CodeGenerator creates reproducible Python code
-3. Jupyter notebooks generated with markdown documentation
-4. SQL queries created for database operations
-5. Complete packages exported as ZIP files
+- **Authentication-First Design**: All main features require user authentication with graceful redirects
+- **Modular Database Operations**: Centralized DatabaseManager class with utility methods for all data operations
+- **Premium Differentiation**: Different user experiences and content access based on premium status
+- **Session-Based State**: Streamlit session state for maintaining user context across page navigation
+- **Error Handling**: Comprehensive try-catch blocks with fallback modes for external service failures
 
 ## External Dependencies
 
-### Core Libraries
-- **Streamlit**: Web application framework and UI components
-- **Pandas**: Data manipulation and analysis
-- **NumPy**: Numerical computing and array operations
-- **Plotly**: Interactive visualization library
+### Core Dependencies
+- **Streamlit** (≥1.28.0): Primary web framework for the application interface
+- **PostgreSQL with psycopg2-binary** (≥2.9.7): Primary database for user data, courses, and analytics
+- **Pandas** (≥2.0.0): Data manipulation and analysis for user analytics and reporting
+- **Plotly** (≥5.15.0): Interactive charts and visualizations for learning analytics dashboard
 
-### AI Integration
-- **OpenAI**: GPT-4o model for intelligent analysis and suggestions
-- **JSON**: Data serialization for AI prompt formatting
+### Communication Services
+- **Twilio** (≥8.2.0): SMS service for OTP authentication and notifications (optional with demo fallback)
 
-### Database Support
-- **SQLAlchemy**: Database abstraction layer for multiple database types
-- **Requests**: HTTP client for API data import
+### Deployment Infrastructure
+- **Render.com**: Cloud hosting platform with PostgreSQL database integration
+- **Python 3.11**: Runtime environment specified for consistent deployment
 
-### File Processing
-- **IO**: File handling and streaming
-- **ZipFile**: Archive creation for export packages
-- **Base64**: Encoding for file downloads
+### Development Tools
+- **python-dotenv**: Environment variable management for configuration
+- **setuptools**: Package management and distribution setup
 
-## Deployment Strategy
-
-### Environment Configuration
-- **API Keys**: OpenAI API key via environment variables
-- **Database**: Optional database connections via environment variables
-- **Debug Mode**: Streamlit development server for local testing
-
-### Production Considerations
-- **Security**: API key validation and secure handling
-- **Performance**: Session state optimization for large datasets
-- **Scalability**: Modular architecture allows for easy feature expansion
-- **Error Handling**: Comprehensive error messages and graceful degradation
-
-### Replit-Specific Setup
-- Environment variables for API keys
-- File upload handling for temporary storage
-- Session state persistence across page navigation
-- Responsive layout for various screen sizes
-
-## Development Notes
-
-The application follows a modular architecture with clear separation of concerns. Each utility module handles specific functionality, making the codebase maintainable and extensible. The AI integration is designed to be optional, allowing the application to function with limited features when API keys are not available.
-
-The session state management ensures data persistence across page navigation, providing a seamless user experience. The code generation features make the tool valuable for both exploratory analysis and production workflows.
+### Database Configuration
+- **Production Database**: Render PostgreSQL instance with connection string management
+- **Development Fallback**: In-memory data storage when database is unavailable
+- **Connection Pooling**: Managed through psycopg2 with error handling and reconnection logic

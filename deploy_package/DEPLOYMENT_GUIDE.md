@@ -10,9 +10,9 @@
    - Make it public or private (your choice)
    - Don't initialize with README since we have files
 
-2. **Download project files from Replit:**
-   - In Replit, go to the file explorer
-   - Click the three dots menu and select "Download as zip"
+2. **Download project files:**
+   - Go to your development environment file explorer
+   - Download all project files as a zip archive
    - Extract the zip file on your computer
 
 3. **Upload to GitHub:**

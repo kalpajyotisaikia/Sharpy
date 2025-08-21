@@ -38,3 +38,14 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.bak
+
+# Development environment files
+.replit
+.config/
+replit.nix
+.upm/
+uv.lock
+pyproject.toml
+
+# Project documentation (internal)
+project_docs.md
