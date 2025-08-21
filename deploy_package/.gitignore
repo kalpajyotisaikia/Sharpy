@@ -46,6 +46,3 @@ replit.nix
 .upm/
 uv.lock
 pyproject.toml
-
-# Project documentation (internal)
-project_docs.md
