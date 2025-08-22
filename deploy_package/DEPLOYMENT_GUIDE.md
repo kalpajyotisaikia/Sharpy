@@ -40,9 +40,19 @@
    ```
    Name: sharpy-educational-app
    Environment: Python 3
-   Build Command: pip install -r render_requirements.txt
+   Python Version: 3.10.0
+   Build Command: pip install -r requirements.txt
    Start Command: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
    ```
+
+### Troubleshooting "metadata-generation-failed" Error:
+
+If you encounter this error during deployment:
+1. **Use Python 3.10.0** instead of 3.11.0 in Render settings
+2. **Use `requirements.txt`** in build command (not `render_requirements.txt`)  
+3. **Add environment variables** in Render dashboard:
+   - `PYTHON_VERSION` = `3.10.0`
+   - `PIP_VERSION` = `22.3.1`
 
 4. **Set environment variables:**
    - In Render dashboard, go to your service
