@@ -3,7 +3,7 @@ services:
     name: sharpy-educational-app
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
+    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
     plan: free
     envVars:
       - key: DATABASE_URL
